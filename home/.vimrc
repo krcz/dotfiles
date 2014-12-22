@@ -29,6 +29,7 @@ Plugin 'mattn/gist-vim' " Gist
 " lang support
 Plugin 'JuliaLang/julia-vim' " Julia
 Plugin 'davidhalter/jedi-vim' " Python
+Plugin 'hylang/vim-hy'
 
 " autocomplete
 Plugin 'ervandew/supertab'
