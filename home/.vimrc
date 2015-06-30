@@ -16,6 +16,7 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'tpope/vim-vividchalk'
 Plugin 'vim-scripts/miko'
 Plugin 'gmarik/ingretu'
+Plugin 'BusyBee'
 
 Plugin 'scrooloose/nerdtree' " file manager
 Plugin 'sjl/gundo.vim' " undo tree
@@ -30,6 +31,7 @@ Plugin 'mattn/gist-vim' " Gist
 Plugin 'JuliaLang/julia-vim' " Julia
 Plugin 'davidhalter/jedi-vim' " Python
 Plugin 'hylang/vim-hy'
+Plugin 'luochen1990/rainbow'
 
 " autocomplete
 Plugin 'ervandew/supertab'
@@ -47,7 +49,8 @@ call vundle#end()
 filetype plugin indent on
 syntax on
 set fileencoding=utf8 encoding=utf8
-colorscheme miko
+set background=dark
+colorscheme vividchalk
 
 autocmd FileType * set tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype python set tabstop=8 shiftwidth=4 expandtab
@@ -111,3 +114,11 @@ nnoremap <silent> <C-Up> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-Down> :TmuxNavigateDown<cr>
 
 let g:jedi#use_tabs_not_buffers = 0
+
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+\    'ctermfgs': [15, 20, 196, 240, 161, 11],
+\    'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+\    'operators': '_,_',
+\    'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold']
+\}
