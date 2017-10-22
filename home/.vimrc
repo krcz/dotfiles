@@ -1,11 +1,19 @@
 set nocompatible
 filetype off
 
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+if has('nvim')
+  if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+          \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  endif
+else
+  if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+          \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  endif
+end
 
 " Plugins
 call plug#begin('~/.vim/plugged')
@@ -119,7 +127,7 @@ let g:jedi#use_tabs_not_buffers = 0
 
 let g:rainbow_active = 1
 let g:rainbow_conf = {
-\    'ctermfgs': [15, 20, 196, 240, 161, 11],
+\    'ctermfgs': [15, 33, 196, 240, 161, 11],
 \    'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
 \    'operators': '_,_',
 \    'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold']
