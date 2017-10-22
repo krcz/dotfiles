@@ -1,50 +1,52 @@
 set nocompatible
 filetype off
 
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 " Plugins
-set rtp+=~/.vim/bundle/Vundle.vim
+call plug#begin('~/.vim/plugged')
 
-call vundle#begin()
+Plug 'gmarik/Vundle.vim' " package management
 
-Plugin 'gmarik/Vundle.vim' " package management
-
-Plugin 'bling/vim-airline' " status line
-Plugin 'bling/vim-bufferline' " buffers in status line
-Plugin 'Yggdroot/indentLine'
+Plug 'bling/vim-airline' " status line
+Plug 'bling/vim-bufferline' " buffers in status line
+Plug 'Yggdroot/indentLine'
 
 " colourschemes
-Plugin 'tpope/vim-vividchalk'
-Plugin 'vim-scripts/miko'
-Plugin 'gmarik/ingretu'
-Plugin 'BusyBee'
+Plug 'tpope/vim-vividchalk'
+Plug 'vim-scripts/miko'
+Plug 'gmarik/ingretu'
+Plug 'BusyBee'
 
-Plugin 'scrooloose/nerdtree' " file manager
-Plugin 'sjl/gundo.vim' " undo tree
+Plug 'scrooloose/nerdtree' " file manager
+Plug 'sjl/gundo.vim' " undo tree
 
-Plugin 'tpope/vim-fugitive' " git integration
-Plugin 'mhinz/vim-signify' " show changes in git repo
+Plug 'tpope/vim-fugitive' " git integration
+Plug 'mhinz/vim-signify' " show changes in git repo
 
-Bundle 'mattn/webapi-vim'
-Plugin 'mattn/gist-vim' " Gist
+Plug 'mattn/webapi-vim'
+Plug 'mattn/gist-vim' " Gist
 
 " lang support
-Plugin 'JuliaLang/julia-vim' " Julia
-Plugin 'davidhalter/jedi-vim' " Python
-Plugin 'hylang/vim-hy'
-Plugin 'luochen1990/rainbow'
-
-" autocomplete
-Plugin 'ervandew/supertab'
+Plug 'JuliaLang/julia-vim' " Julia
+Plug 'davidhalter/jedi-vim' " Python
+Plug 'hylang/vim-hy'
+Plug 'luochen1990/rainbow'
+Plug 'rust-lang/rust.vim'
 
 "tmux
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'edkolev/tmuxline.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'edkolev/tmuxline.vim'
 
 " To learn
-" Plugin 'Lokaltog/vim-easymotion'
-" Plugin 'SirVer/ultisnips' or 'Shougo/neosnippet.vim'
+" Plug 'Lokaltog/vim-easymotion'
+" Plug 'SirVer/ultisnips' or 'Shougo/neosnippet.vim'
 
-call vundle#end()
+call plug#end()
 
 filetype plugin indent on
 syntax on
