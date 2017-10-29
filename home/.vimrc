@@ -38,10 +38,15 @@ Plug 'mattn/gist-vim' " Gist
 
 " lang support
 Plug 'JuliaLang/julia-vim' " Julia
-Plug 'davidhalter/jedi-vim' " Python
 Plug 'hylang/vim-hy'
 Plug 'luochen1990/rainbow'
 Plug 'rust-lang/rust.vim'
+
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'zchee/deoplete-jedi'
+    Plug 'tweekmonster/deoplete-clang2'
+endif
 
 "tmux
 Plug 'christoomey/vim-tmux-navigator'
@@ -61,6 +66,8 @@ colorscheme vividchalk
 
 autocmd FileType * set tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype python set tabstop=8 shiftwidth=4 expandtab
+
+let g:deoplete#enable_at_startup = 1
 
 " Show airline always
 set laststatus=2
@@ -119,8 +126,6 @@ nnoremap <silent> <C-Left> :TmuxNavigateLeft<cr>
 nnoremap <silent> <C-Right> :TmuxNavigateRight<cr>
 nnoremap <silent> <C-Up> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-Down> :TmuxNavigateDown<cr>
-
-let g:jedi#use_tabs_not_buffers = 0
 
 let g:rainbow_active = 1
 let g:rainbow_conf = {
