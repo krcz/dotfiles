@@ -18,8 +18,6 @@ end
 " Plugins
 call plug#begin('~/.vim/plugged')
 
-Plug 'gmarik/Vundle.vim' " package management
-
 Plug 'bling/vim-airline' " status line
 Plug 'bling/vim-bufferline' " buffers in status line
 Plug 'Yggdroot/indentLine'
@@ -28,7 +26,6 @@ Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-vividchalk'
 Plug 'vim-scripts/miko'
 Plug 'gmarik/ingretu'
-Plug 'BusyBee'
 
 Plug 'scrooloose/nerdtree' " file manager
 Plug 'sjl/gundo.vim' " undo tree
