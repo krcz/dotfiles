@@ -46,6 +46,7 @@ if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'zchee/deoplete-jedi'
     Plug 'tweekmonster/deoplete-clang2'
+    Plug 'sebastianmarkow/deoplete-rust'
 endif
 
 "tmux
@@ -89,6 +90,9 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+let g:deoplete#sources#rust#racer_binary='/home/krcz/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path='/home/krcz/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
 
 " Support for tmux modified keys
 " see: http://stackoverflow.com/questions/15445481/mapping-arrow-keys-when-running-tmux
@@ -134,3 +138,5 @@ let g:rainbow_conf = {
 \    'operators': '_,_',
 \    'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold']
 \}
+
+let g:tex_conceal = ""
