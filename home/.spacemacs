@@ -3,9 +3,8 @@
 ;; It must be stored in your home directory.
 
 (defun dotspacemacs/layers ()
-  "Configuration Layers declaration.
-You should not put any user code in this function besides modifying the variable
-values."
+  "Layer configuration:
+This function should only modify configuration layer settings."
   (setq-default
    ;; Base distribution to use. This is a layer contained in the directory
    ;; `+distribution'. For now available distributions are `spacemacs-base'
@@ -37,8 +36,8 @@ values."
      sql
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
-     ;; <M-m f e R> (Emacs style) to install them.
+     ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
+     ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      helm
      auto-completion
@@ -57,6 +56,7 @@ values."
      themes-megapack
 
      java
+     scala
      html
      javascript
      typescript
@@ -66,26 +66,31 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
+   ;; To use a local version of a package, use the `:location' property:
+   ;; '(your-package :location "~/path/to/your-package/")
+   ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '()
+
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
+
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '()
+
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
-   ;; `used-only' installs only explicitly used packages and uninstall any
-   ;; unused packages as well as their unused dependencies.
-   ;; `used-but-keep-unused' installs only the used packages but won't uninstall
-   ;; them if they become unused. `all' installs *all* packages supported by
-   ;; Spacemacs and never uninstall them. (default is `used-only')
+   ;; `used-only' installs only explicitly used packages and deletes any unused
+   ;; packages as well as their unused dependencies. `used-but-keep-unused'
+   ;; installs only the used packages but won't delete unused ones. `all'
+   ;; installs *all* packages supported by Spacemacs and never uninstalls them.
+   ;; (default is `used-only')
    dotspacemacs-install-packages 'used-only))
 
 (defun dotspacemacs/init ()
-  "Initialization function.
-This function is called at the very startup of Spacemacs initialization
-before layers configuration.
-You should not put any user code in there besides modifying the variable
-values."
+    "Initialization:
+This function is called at the very beginning of Spacemacs startup,
+before layer configuration.
+It should only modify the values of Spacemacs settings."
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
   (setq-default
@@ -140,6 +145,16 @@ values."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(spacemacs-dark
                          spacemacs-light)
+
+   ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
+   ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
+   ;; first three are spaceline themes. `doom' is the doom-emacs mode-line.
+   ;; `vanilla' is default Emacs mode-line. `custom' is a user defined themes,
+   ;; refer to the DOCUMENTATION.org for more info on how to create your own
+   ;; spaceline theme. Value can be a symbol or list with additional properties.
+   ;; (default '(spacemacs :separator wave :separator-scale 1.5))
+   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -325,7 +340,15 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (setq jiralib-url "https://jiraims.rm.imshealth.com"))
+  (setq-default dotspacemacs-configuration-layers
+                '((scala :variables scala-backend 'scala-metals)))
+  (setq-default dotspacemacs-configuration-layers '(
+                                                    (scala :variables scala-enable-eldoc t)))
+  (setq org-agenda-files (list "~/org/zadania.org" "~/org/zakupy.org" "~/org/roam/" "~/org/ludzie" "~/org/iohk"))
+  (setq org-default-notes-file (concat org-directory "/notatki.org"))
+  (setq org-agenda-custom-commands
+        '(("X" "My agenda" ((agenda) (alltodo)) nil ("~/org/agenda/agenda.org"))))
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -356,6 +379,9 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(evil-want-Y-yank-to-eol nil)
  '(lsp-rust-server (quote rust-analyzer))
+ '(org-todo-keywords
+   (quote
+    ((sequence "PLANNED(p)" "TODO(t)" "STARTED(s)" "DONE(d)" "CANCELLED(c)"))))
  '(package-selected-packages
    (quote
     (graphviz-dot-mode racket-mode faceup lv transient zenburn-theme zen-and-art-theme white-sand-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme rebecca-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme madhat2r-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme farmhouse-theme exotica-theme espresso-theme dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme web-mode web-beautify tagedit slim-mode scss-mode sass-mode pug-mode livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc helm-css-scss haml-mode emmet-mode company-web web-completion-data company-tern dash-functional tern coffee-mode org-jira sql-indent toml-mode racer noflet flycheck-rust ensime sbt-mode scala-mode company-emacs-eclim eclim cargo markdown-mode rust-mode unfill smeargle orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit ghub with-editor company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
