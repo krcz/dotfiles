@@ -63,3 +63,20 @@
                         "~/org/projekty"
                         "~/org/studia"))
 (setq org-default-notes-file (concat org-directory "/notatki.org"))
+
+(define-derived-mode pincushion-mode fundamental-mode "pincushion"
+  "major mode for editing pincushion language code.")
+
+(add-to-list 'auto-mode-alist '("\\.pin\\'" . pincushion-mode))
+
+(require 'tree-sitter)
+(require 'tree-sitter-load)
+(require 'tree-sitter-hl)
+(setf (map-elt tree-sitter-major-mode-language-alist 'pincushion-mode) 'pincushion)
+
+(setq tree-sitter-hl-default-patterns
+      (with-temp-buffer
+          (insert-file-contents "/home/krcz/code/tree-sitter-pincushion/queries/highlights.scm")
+          (goto-char (point-max))
+          (insert "\n")
+        (buffer-string)))
